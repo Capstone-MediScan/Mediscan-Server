@@ -1,13 +1,16 @@
 package org.mediscan.core.api.controller;
 
+import org.mediscan.core.api.controller.v1.request.PillIdentificationRequestDto
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class PillIController {
-    @GetMapping("/pill")
-    fun identifyPill(): ResponseEntity<*> {
+    @PostMapping("/pill")
+    fun identifyPill(@RequestBody request: PillIdentificationRequestDto): ResponseEntity<*> {
+
         return ResponseEntity.ok("Pill I")
     }
 }
