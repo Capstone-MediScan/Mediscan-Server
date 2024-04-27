@@ -10,7 +10,7 @@ class PillService (
     private val pillManager: PillManager
 ){
     fun identifyPill(frontImage: MultipartFile, backImage: MultipartFile,
-                     fillShape: String, frontMarking: String, backMarking: String ): PillDomainIdentificationResponseDto  {
+                     fillShape: String, frontMarking: String, backMarking: String ): List<PillDomainIdentificationResponseDto> {
 
         val pillDomainResponse = pillManager
             .identifyPill(PillDomainIdentificationRequestDto(frontImage, backImage, fillShape, frontMarking, backMarking))

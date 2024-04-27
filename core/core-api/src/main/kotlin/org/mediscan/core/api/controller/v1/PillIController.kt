@@ -13,8 +13,22 @@ class PillIController(
     private var pillService: PillService
 ) {
     @PostMapping("/pill")
-    fun identifyPill(@RequestBody request: PillIdentificationRequestDto): ApiResponse<PillIdentificationResponseDto> {
-        val result =pillService.identifyPill(request.frontImage, request.backImage, request.pillShape, request.frontMarking, request.backMarking)
-        return ApiResponse.success(PillIdentificationResponseDto(result.confidence,result.drugCode))
+    fun identifyPill(@RequestBody request: PillIdentificationRequestDto): ApiResponse<List<PillIdentificationResponseDto>> {
+        val results = pillService.identifyPill(
+            request.frontImage,
+            request.backImage,
+            request.pillShape,
+            request.frontMarking,
+            request.backMarking
+        )
+
+        val responseDtos = results.map { result ->
+            PillIdentificationResponseDto(
+                drugCode = result.drugCode,
+                confidence = result.confidence
+            )
+        }
+
+        return ApiResponse.success(responseDtos)
     }
 }
