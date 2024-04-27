@@ -1,8 +1,8 @@
-package org.mediscan.core.api.controller.v1.request
+package org.mediscan.core.api.domain.v1.request;
 
 import org.springframework.web.multipart.MultipartFile
 
-data class PillIdentificationRequestDto(
+data class PillDomainIdentificationRequestDto (
     val frontImage: MultipartFile,
     val backImage: MultipartFile,
     val pillShape: String,
