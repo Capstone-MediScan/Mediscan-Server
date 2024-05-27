@@ -35,7 +35,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
-          arguments: clean bootJar
+          arguments: build
       - name: Check build output
         run: ls -al /home/runner/work/Mediscan-Server/Mediscan-Server
       - name: docker image build
