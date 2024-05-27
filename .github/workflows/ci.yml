@@ -49,20 +49,18 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mediscan
   run-docker-image-on-ec2:
     needs: build-docker-image
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
-      # 1. 최신 이미지를 풀받습니다
-      - name: docker pull
-        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mediscan
-
-      # 2. 기존의 컨테이너를 중지시킵니다
-      - name: docker stop container
-        run: sudo docker stop $(sudo docker ps -q) 2>/dev/null || true
-
-      # 3. 최신 이미지를 컨테이너화하여 실행시킵니다
-      - name: docker run new container
-        run: sudo docker run --name startingblock-prod --rm -d -p 8080:8080 -e TZ=Asia/Seoul ${{ secrets.DOCKERHUB_USERNAME }}/mediscan
-
-      # 4. 미사용 이미지를 정리합니다
-      - name: delete old docker image
-        run: sudo docker system prune -f
+      - name: Deploy to prod
+        uses: appleboy/ssh-action@v0.1.4
+        id: deploy-prod
+        if: contains(github.ref, 'main')
+        with:
+          host: ${{ secrets.HOST_DEV }}
+          username: ${{ secrets.USERNAME }}
+          port: 22
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            ssh prod sudo docker rm -f $(ssh prod sudo docker ps -qa)
+            ssh prod sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
+            ssh prod sudo docker run -dp 80:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
