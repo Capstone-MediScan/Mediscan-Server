@@ -57,12 +57,6 @@ subprojects {
         enabled = true
     }
 
-    tasks.withType<BootJar> {
-        manifest {
-            attributes["Main-Class"] = "core.core-api.src.main.kotlin.org.mediscan.core.api.CoreApiApplication.kt"
-        }
-    }
-
     java.sourceCompatibility = JavaVersion.valueOf("VERSION_${property("javaVersion")}")
     tasks.withType<KotlinCompile> {
         kotlinOptions {
