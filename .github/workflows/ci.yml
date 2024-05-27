@@ -63,6 +63,4 @@ jobs:
             sudo docker stop mediscan 2>/dev/null || true
             sudo docker rm mediscan 2>/dev/null || true
             sudo docker run --name mediscan -d -p 8080:8080 suretrea/${{ secrets.DOCKER_REPO_PROD }}
-            sleep 10
-            sudo docker logs mediscan
             sudo docker system prune -f
