@@ -40,5 +40,4 @@ class PillEntity(
     val markCodeBack: String,
     val ediCode: String,
     val bizrno: String,
-) {
-}
+)

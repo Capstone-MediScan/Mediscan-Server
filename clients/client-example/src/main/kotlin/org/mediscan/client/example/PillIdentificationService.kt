@@ -7,21 +7,21 @@ import org.springframework.web.multipart.MultipartFile
 
 @Service
 class PillIdentificationService(
-    private val aiServiceClient: AiServiceClient
+    private val aiServiceClient: AiServiceClient,
 ) {
     fun identifyPill(
         frontImage: MultipartFile,
         backImage: MultipartFile,
         pillShape: String,
         frontMarking: String = "None",
-        backMarking: String = "None"
+        backMarking: String = "None",
     ): List<PillIdentificationResponseDto> {
         val request = PillIdentificationRequestDto(
             frontImage = frontImage,
             backImage = backImage,
             pillShape = pillShape,
             frontMarking = frontMarking,
-            backMarking = backMarking
+            backMarking = backMarking,
         )
         return aiServiceClient.identifyPill(request)
     }

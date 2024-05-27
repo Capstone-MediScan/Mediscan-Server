@@ -1,8 +1,8 @@
 package org.mediscan.storage.db.core
 
-import org.mediscan.storage.db.CoreDbContextTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.mediscan.storage.db.CoreDbContextTest
 
 class ExampleRepositoryIT(
     val exampleRepository: ExampleRepository,

@@ -10,4 +10,4 @@ build/
 *.iml
 *.ipr
 out/
-/storage/db-core/src/main/resources/
+*.yml

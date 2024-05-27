@@ -10,5 +10,5 @@ enum class DrugShape(s: String) {
     OCTAGON("팔각형"),
     PENTAGON("오각형"),
     SEMICIRCLE("반원형"),
-    OTHER("기타")
+    OTHER("기타"),
 }
