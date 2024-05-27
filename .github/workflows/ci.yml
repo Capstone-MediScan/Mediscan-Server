@@ -61,6 +61,6 @@ jobs:
           port: 22
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            ssh prod sudo docker rm -f $(ssh prod sudo docker ps -qa)
-            ssh prod sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
-            ssh prod sudo docker run -dp 80:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
+            ssh sudo docker rm -f $(ssh sudo docker ps -qa)
+            ssh sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
+            ssh sudo docker run -dp 80:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
