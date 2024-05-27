@@ -36,8 +36,6 @@ jobs:
         uses: gradle/gradle-build-action@v3
         with:
           arguments: clean jar
-      - name: Check build output
-        run: ls -al /home/runner/work/Mediscan-Server/Mediscan-Server
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mediscan .
       - name: docker login
