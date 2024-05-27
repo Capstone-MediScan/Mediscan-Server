@@ -1,11 +1,13 @@
 package org.mediscan.storage.db.core
 
 import jakarta.persistence.Entity
+import jakarta.persistence.Id
 import jakarta.persistence.Table
 
 @Entity
 @Table(name = "pill")
 class PillEntity(
+    @Id
     val itemSeq: String,
     val itemName: String,
     val entpSeq: String,
@@ -38,5 +40,5 @@ class PillEntity(
     val markCodeBack: String,
     val ediCode: String,
     val bizrno: String,
-) : BaseEntity() {
+) {
 }
