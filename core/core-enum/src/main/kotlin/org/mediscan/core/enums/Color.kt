@@ -17,5 +17,5 @@ enum class Color(s: String) {
     RED_PURPLE("자주"),
     TRANSPARENT("투명"),
     INDIGO("남색"),
-    OTHER("하양")
+    OTHER("하양"),
 }
