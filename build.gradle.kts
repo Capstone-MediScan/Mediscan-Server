@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     kotlin("jvm")
@@ -54,6 +55,12 @@ subprojects {
 
     tasks.getByName("jar") {
         enabled = true
+    }
+
+    tasks.withType<BootJar> {
+        manifest {
+            attributes["Main-Class"] = "core.core-api.src.main.kotlin.org.mediscan.core.api.CoreApiApplication.kt"
+        }
     }
 
     java.sourceCompatibility = JavaVersion.valueOf("VERSION_${property("javaVersion")}")
