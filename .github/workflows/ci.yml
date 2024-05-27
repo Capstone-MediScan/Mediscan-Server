@@ -37,7 +37,7 @@ jobs:
         with:
           arguments: clean bootJar
       - name: Check build output
-        run: ls -al /home/runner/work/Mediscan-Server/Mediscan-Server/build/libs
+        run: ls -al /home/runner/work/Mediscan-Server/Mediscan-Server
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mediscan .
       - name: docker login
