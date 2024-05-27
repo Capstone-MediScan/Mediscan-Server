@@ -35,7 +35,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
-          arguments: clean bootJar
+          arguments: clean bootJar --stacktrace --info
       - name: Check build output
         run: ls -la build/libs
       - name: docker image build
