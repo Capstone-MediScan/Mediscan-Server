@@ -1,16 +1,16 @@
 package org.mediscan.core.api.controller.v1
 
+import io.mockk.every
+import io.mockk.mockk
+import io.restassured.http.ContentType
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.mediscan.core.api.controller.v1.request.ExampleRequestDto
 import org.mediscan.core.api.domain.ExampleResult
 import org.mediscan.core.api.domain.ExampleService
 import org.mediscan.test.api.RestDocsTest
 import org.mediscan.test.api.RestDocsUtils.requestPreprocessor
 import org.mediscan.test.api.RestDocsUtils.responsePreprocessor
-import io.mockk.every
-import io.mockk.mockk
-import io.restassured.http.ContentType
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.springframework.http.HttpStatus
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.payload.JsonFieldType
