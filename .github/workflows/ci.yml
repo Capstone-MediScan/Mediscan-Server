@@ -36,6 +36,8 @@ jobs:
         uses: gradle/gradle-build-action@v3
         with:
           arguments: clean jar
+      - name: Move JAR to root (for Docker build context)
+        run: cp core/core-api/build/libs/*.jar .
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mediscan .
       - name: docker login
