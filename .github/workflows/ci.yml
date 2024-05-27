@@ -29,9 +29,9 @@ jobs:
           arguments: ktlintCheck
       - name: create .env file
         run: |
-          mkdir -p .storage/db-core/src/main/resources
-          touch .storage/db-core/src/main/resources/db-core.yml
-          echo "${{ secrets.DB_CORE_YML }}" >> storage/db-core/src/main/resources/db-core.yml
+          sudo mkdir -p storage/db-core/src/main/resources
+          sudo touch storage/db-core/src/main/resources/db-core.yml
+          sudo echo "${{ secrets.DB_CORE_YML }}" > storage/db-core/src/main/resources/db-core.yml
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
