@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p .storage/src/main/resources
           touch .storage/src/main/resources/db-core.yml
-          echo "${{ secrets.DB_CORE_YML }}" >> storage/src/main/resources/db-core.yml
+          echo "${{ secrets.DB_CORE_YML }}" > storage/src/main/resources/db-core.yml
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
