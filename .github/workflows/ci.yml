@@ -33,7 +33,7 @@ jobs:
 #          touch .storage/src/main/resources/db-core.yml
 #          echo "${{ secrets.DB_CORE_YML }}" >> storage/src/main/resources/db-core.yml
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: clean bootJar
       - name: docker image build
