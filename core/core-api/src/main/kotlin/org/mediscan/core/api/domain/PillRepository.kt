@@ -1,4 +1,3 @@
 package org.mediscan.core.api.domain
 
-interface PillRepository {
-}
+interface PillRepository

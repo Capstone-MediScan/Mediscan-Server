@@ -33,5 +33,5 @@ data class Pill(
     val markCodeFront: String,
     val markCodeBack: String,
     val ediCode: String,
-    val bizrno: String
+    val bizrno: String,
 )

@@ -4,6 +4,5 @@ class PillSearchRequestDto(
     val pillShape: String,
     val frontMarking: String,
     val backMarking: String,
-    val color: String
-) {
-}
+    val color: String,
+)

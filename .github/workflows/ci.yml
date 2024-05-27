@@ -20,26 +20,22 @@ jobs:
         with:
           java-version: '21'
           distribution: 'adopt'
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
       - name: Lint
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: ktlintCheck
-      - name: Test
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        with:
-          arguments: test
       - name: create .env file
         run: |
-          mkdir -p .storage/src/main/resources
-          touch .storage/src/main/resources/db-core.yml
-          echo "${{ secrets.DB_CORE_YML }}" >> storage/src/main/resources/db-core.yml
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-        shell: bash
+          mkdir -p storage/db-core/src/main/resources
+          touch storage/db-core/src/main/resources/db-core.yml
+          echo "${{ secrets.DB_CORE_YML }}" > storage/db-core/src/main/resources/db-core.yml
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        uses: gradle/gradle-build-action@v3
         with:
-          arguments: clean bootJar
+          arguments: clean build
       - name: docker image build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mediscan .
       - name: docker login
@@ -51,20 +47,20 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mediscan
   run-docker-image-on-ec2:
     needs: build-docker-image
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
-      # 1. 최신 이미지를 풀받습니다
-      - name: docker pull
-        run: sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mediscan
-
-      # 2. 기존의 컨테이너를 중지시킵니다
-      - name: docker stop container
-        run: sudo docker stop $(sudo docker ps -q) 2>/dev/null || true
-
-      # 3. 최신 이미지를 컨테이너화하여 실행시킵니다
-      - name: docker run new container
-        run: sudo docker run --name startingblock-prod --rm -d -p 8080:8080 -e TZ=Asia/Seoul ${{ secrets.DOCKERHUB_USERNAME }}/mediscan
-
-      # 4. 미사용 이미지를 정리합니다
-      - name: delete old docker image
-        run: sudo docker system prune -f
+      - name: Deploy to prod
+        uses: appleboy/ssh-action@v0.1.4
+        id: deploy-prod
+        if: contains(github.ref, 'main')
+        with:
+          host: ${{ secrets.HOST_DEV }}
+          username: ${{ secrets.USERNAME }}
+          port: 22
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            sudo docker pull suretrea/${{ secrets.DOCKER_REPO_PROD }}
+            sudo docker stop mediscan 2>/dev/null || true
+            sudo docker rm mediscan 2>/dev/null || true
+            sudo docker run --name mediscan -d -p 80:8080 suretrea/${{ secrets.DOCKER_REPO_PROD }}
+            sudo docker system prune -f

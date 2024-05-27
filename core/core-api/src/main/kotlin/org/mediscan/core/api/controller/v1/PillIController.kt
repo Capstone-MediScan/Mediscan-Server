@@ -1,4 +1,4 @@
-package org.mediscan.core.api.controller.v1;
+package org.mediscan.core.api.controller.v1
 
 import org.mediscan.core.api.controller.v1.request.PillIdentificationRequestDto
 import org.mediscan.core.api.controller.v1.request.PillSearchRequestDto
@@ -8,11 +8,11 @@ import org.mediscan.core.api.domain.PillService
 import org.mediscan.core.api.support.response.ApiResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class PillIController(
-    private var pillService: PillService
+    private var pillService: PillService,
 ) {
     @PostMapping("/pill")
     fun identifyPill(@RequestBody request: PillIdentificationRequestDto): ApiResponse<List<PillIdentificationResponseDto>> {
@@ -21,13 +21,13 @@ class PillIController(
             request.backImage,
             request.pillShape,
             request.frontMarking,
-            request.backMarking
+            request.backMarking,
         )
 
         val responseDtos = results.map { result ->
             PillIdentificationResponseDto(
                 drugCode = result.drugCode,
-                confidence = result.confidence
+                confidence = result.confidence,
             )
         }
 
