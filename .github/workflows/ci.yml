@@ -61,11 +61,11 @@ jobs:
           port: 22
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            echo "Docker Username: ${{ secrets.DOCKER_USERNAME }}"
-            echo "Docker Repo: ${{ secrets.DOCKER_REPO_PROD }}"
-            CONTAINER_IDS=$(sudo docker ps -qa)
-            if [ ! -z "$CONTAINER_IDS" ]; then
-              sudo docker rm -f $CONTAINER_IDS
-            fi
+#            echo "Docker Username: ${{ secrets.DOCKER_USERNAME }}"
+#            echo "Docker Repo: ${{ secrets.DOCKER_REPO_PROD }}"
+#            CONTAINER_IDS=$(sudo docker ps -qa)
+#            if [ ! -z "$CONTAINER_IDS" ]; then
+#              sudo docker rm -f $CONTAINER_IDS
+#            fi
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
             sudo docker run -dp 80:8080 ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO_PROD }}
