@@ -1,7 +1,9 @@
 package org.mediscan.core.api.controller.v1;
 
 import org.mediscan.core.api.controller.v1.request.PillIdentificationRequestDto
+import org.mediscan.core.api.controller.v1.request.PillSearchRequestDto
 import org.mediscan.core.api.controller.v1.response.PillIdentificationResponseDto
+import org.mediscan.core.api.controller.v1.response.PillSearchResponseDto
 import org.mediscan.core.api.domain.PillService
 import org.mediscan.core.api.support.response.ApiResponse
 import org.springframework.web.bind.annotation.PostMapping
@@ -31,4 +33,24 @@ class PillIController(
 
         return ApiResponse.success(responseDtos)
     }
+
+//    @PostMapping("/pill/search")
+//    fun searchPill(
+//        @RequestBody request: PillSearchRequestDto
+//    ): ApiResponse<List<PillSearchResponseDto>> {
+//        val results = pillService.searchPill(
+//            request.pillShape,
+//            request.frontMarking,
+//            request.backMarking,
+//            request.color
+//        )
+//
+//        val responseDtos = results.map { result ->
+//            PillSearchResponseDto(
+//
+//            )
+//        }
+//
+//        return ApiResponse.success(responseDtos)
+//    }
 }

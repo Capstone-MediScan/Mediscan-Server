@@ -1,8 +1,8 @@
 package org.mediscan.core.api.domain;
 
 import org.mediscan.client.example.PillIdentificationService
-import org.mediscan.core.api.domain.v1.request.PillDomainIdentificationRequestDto
-import org.mediscan.core.api.domain.v1.response.PillDomainIdentificationResponseDto
+import org.mediscan.core.api.controller.v1.request.PillDomainIdentificationRequestDto
+import org.mediscan.core.api.controller.v1.response.PillDomainIdentificationResponseDto
 import org.springframework.stereotype.Component
 
 

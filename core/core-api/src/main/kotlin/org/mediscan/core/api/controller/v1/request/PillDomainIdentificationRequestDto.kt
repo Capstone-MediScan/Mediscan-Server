@@ -1,4 +1,4 @@
-package org.mediscan.core.api.domain.v1.request;
+package org.mediscan.core.api.controller.v1.request;
 
 import org.springframework.web.multipart.MultipartFile
 
