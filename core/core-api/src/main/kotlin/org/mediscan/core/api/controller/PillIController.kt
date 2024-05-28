@@ -1,14 +1,15 @@
 package org.mediscan.core.api.controller
 
 import org.mediscan.core.api.controller.v1.request.PillIdentificationRequestDto
-import org.mediscan.core.api.controller.v1.request.PillSearchRequestDto
 import org.mediscan.core.api.controller.v1.response.PillIdentificationResponseDto
 import org.mediscan.core.api.controller.v1.response.PillSearchResponseDto
 import org.mediscan.core.api.domain.PillService
 import org.mediscan.core.api.support.response.ApiResponse
+import org.mediscan.core.enums.Color
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -37,13 +38,16 @@ class PillIController(
 
     @GetMapping("/pill/search")
     fun searchPill(
-        @RequestBody request: PillSearchRequestDto,
+        @RequestParam pillShape: String,
+        @RequestParam frontMarking: String,
+        @RequestParam backMarking: String,
+        @RequestParam color: Color,
     ): ApiResponse<List<PillSearchResponseDto>> {
         val results = pillService.searchPill(
-            request.pillShape,
-            request.frontMarking,
-            request.backMarking,
-            request.color,
+            pillShape,
+            frontMarking,
+            backMarking,
+            color,
         )
 
         return ApiResponse.success(results)
