@@ -2,6 +2,8 @@ package org.mediscan.core.api.domain
 
 import org.mediscan.core.api.controller.v1.request.PillDomainIdentificationRequestDto
 import org.mediscan.core.api.controller.v1.response.PillDomainIdentificationResponseDto
+import org.mediscan.core.api.controller.v1.response.PillSearchResponseDto
+import org.mediscan.core.enums.Color
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 
@@ -31,8 +33,8 @@ class PillService(
         return pillDomainResponse
     }
 
-//    fun searchPill(pillShape: String, frontMarking: String, backMarking: String, color: String): List<PillDomainIdentificationResponseDto> {
-//        val pillDomainResponse = pillReader.readPill(pillShape, frontMarking, backMarking, color)
-//        return pillDomainResponse
-//    }
+    fun searchPill(pillShape: String, frontMarking: String, backMarking: String, color: Color): List<PillSearchResponseDto> {
+        val pillDomainResponse = pillReader.readPill(pillShape, frontMarking, backMarking, color)
+        return PillSearchResponseDto.toDto(pillDomainResponse)
+    }
 }
