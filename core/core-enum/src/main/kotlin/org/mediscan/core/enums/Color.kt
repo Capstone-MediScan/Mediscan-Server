@@ -1,6 +1,6 @@
 package org.mediscan.core.enums
 
-enum class Color(s: String) {
+enum class Color(val s: String) {
     WHITE("하양"),
     YELLOW("노랑"),
     ORANGE("주황"),
