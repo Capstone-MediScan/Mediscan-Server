@@ -18,4 +18,9 @@ class PillReader(
             )
         return Pill.toDto(pillEntities)
     }
+
+    fun readPill(pillId: String): Pill {
+        val pillEntity = pillRepository.findPillEntityByItemSeq(pillId)
+        return Pill.toDto(pillEntity)
+    }
 }
