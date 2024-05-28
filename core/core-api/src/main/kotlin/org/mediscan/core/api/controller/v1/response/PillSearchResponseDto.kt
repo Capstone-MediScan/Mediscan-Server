@@ -5,7 +5,7 @@ import org.mediscan.core.api.domain.Pill
 class PillSearchResponseDto(
     val pillName: String?,
     val itemImage: String?,
-    val classNo: String?,
+    val className: String?,
 ) {
     companion object {
         fun toDto(pillEntities: List<Pill>): List<PillSearchResponseDto> {
@@ -13,7 +13,7 @@ class PillSearchResponseDto(
                 PillSearchResponseDto(
                     pill.itemName,
                     pill.itemImage,
-                    pill.classNo,
+                    pill.className,
                 )
             }
         }
