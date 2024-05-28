@@ -16,7 +16,6 @@ class PillReader(
                 backMarking,
                 color.s,
             )
-        println(color.s)
         return Pill.toDto(pillEntities)
     }
 }

@@ -33,7 +33,12 @@ class PillService(
         return pillDomainResponse
     }
 
-    fun searchPill(pillShape: String, frontMarking: String, backMarking: String, color: Color): List<PillSearchResponseDto> {
+    fun searchPill(
+        pillShape: String,
+        frontMarking: String,
+        backMarking: String,
+        color: Color,
+    ): List<PillSearchResponseDto> {
         val pillDomainResponse = pillReader.readPill(pillShape, frontMarking, backMarking, color)
         return PillSearchResponseDto.toDto(pillDomainResponse)
     }
