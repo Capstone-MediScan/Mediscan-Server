@@ -75,5 +75,42 @@ data class Pill(
                 )
             }
         }
+
+        fun toDto(pillEntity: PillEntity): Pill {
+            return Pill(
+                pillEntity.itemSeq,
+                pillEntity.itemName,
+                pillEntity.entpSeq,
+                pillEntity.entpName,
+                pillEntity.chart,
+                pillEntity.itemImage,
+                pillEntity.printFront,
+                pillEntity.printBack,
+                pillEntity.drugShape,
+                pillEntity.colorClass1,
+                pillEntity.colorClass2,
+                pillEntity.lineFront,
+                pillEntity.lineBack,
+                pillEntity.lengLong,
+                pillEntity.lengShort,
+                pillEntity.thick,
+                pillEntity.imgRegistTs,
+                pillEntity.classNo,
+                pillEntity.className,
+                pillEntity.etcOtcName,
+                pillEntity.itemPermitDate,
+                pillEntity.formCodeName,
+                pillEntity.markCodeFrontAnal,
+                pillEntity.markCodeBackAnal,
+                pillEntity.markCodeFrontImg,
+                pillEntity.markCodeBackImg,
+                pillEntity.itemEngName,
+                pillEntity.changeDate,
+                pillEntity.markCodeFront,
+                pillEntity.markCodeBack,
+                pillEntity.ediCode,
+                pillEntity.bizrno,
+            )
+        }
     }
 }

@@ -2,7 +2,8 @@ package org.mediscan.core.api.controller.v1.response
 
 import org.mediscan.core.api.domain.Pill
 
-class PillSearchResponseDto(
+data class PillSearchResponseDto(
+    val pillId: String?,
     val pillName: String?,
     val itemImage: String?,
     val className: String?,
@@ -11,6 +12,7 @@ class PillSearchResponseDto(
         fun toDto(pillEntities: List<Pill>): List<PillSearchResponseDto> {
             return pillEntities.map { pill ->
                 PillSearchResponseDto(
+                    pill.itemSeq,
                     pill.itemName,
                     pill.itemImage,
                     pill.className,

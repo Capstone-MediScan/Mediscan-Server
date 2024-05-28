@@ -9,4 +9,6 @@ interface PillJpaRepository : JpaRepository<PillEntity, Long> {
         backMarking: String,
         color: String,
     ): List<PillEntity>
+
+    fun findPillEntityByItemSeq(itemSeq: String): PillEntity
 }
