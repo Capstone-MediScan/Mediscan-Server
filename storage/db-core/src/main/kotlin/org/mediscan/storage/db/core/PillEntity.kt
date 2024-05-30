@@ -40,4 +40,17 @@ class PillEntity(
     val markCodeBack: String,
     val ediCode: String,
     val bizrno: String,
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PillEntity) return false
+
+        if (itemSeq != other.itemSeq) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return itemSeq.hashCode()
+    }
+}

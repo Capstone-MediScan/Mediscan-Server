@@ -2,7 +2,7 @@ package org.mediscan.storage.db.core
 
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface PillJpaRepository : JpaRepository<PillEntity, Long> {
+interface PillRepository : JpaRepository<PillEntity, Long>, PillQuerydslRepository {
     fun findPillEntitiesByDrugShapeAndColorClass1OrPrintFrontOrPrintBack(
         shape: String,
         frontMarking: String,
