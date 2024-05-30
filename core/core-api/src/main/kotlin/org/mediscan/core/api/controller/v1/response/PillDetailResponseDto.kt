@@ -21,7 +21,7 @@ data class PillDetailResponseDto(
                 pill.itemSeq,
                 pill.itemName,
                 pill.itemEngName,
-                pill.chart,
+                pill.className,
                 pill.printFront,
                 pill.printBack,
                 pill.drugShape,
