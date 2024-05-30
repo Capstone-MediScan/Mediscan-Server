@@ -36,8 +36,8 @@ class PillService(
 
     fun searchPill(
         pillShape: String,
-        frontMarking: String,
-        backMarking: String,
+        frontMarking: String?,
+        backMarking: String?,
         color: Color,
     ): List<PillSearchResponseDto> {
         val pillDomainResponse = pillReader.readPill(pillShape, frontMarking, backMarking, color)
