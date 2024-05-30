@@ -41,8 +41,8 @@ class PillIController(
     @GetMapping("/pill/search")
     fun searchPill(
         @RequestParam pillShape: String,
-        @RequestParam frontMarking: String,
-        @RequestParam backMarking: String,
+        @RequestParam(required = false) frontMarking: String?,
+        @RequestParam(required = false) backMarking: String?,
         @RequestParam color: Color,
     ): ApiResponse<List<PillSearchResponseDto>> {
         val results = pillService.searchPill(
