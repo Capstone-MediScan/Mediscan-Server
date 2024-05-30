@@ -14,6 +14,7 @@ data class PillDetailResponseDto(
     val length: String?,
     val thick: String?,
     val entpName: String?,
+    val itemImage: String?,
 ) {
     companion object {
         fun toDto(pill: Pill): PillDetailResponseDto {
@@ -24,11 +25,12 @@ data class PillDetailResponseDto(
                 pill.className,
                 pill.printFront,
                 pill.printBack,
-                pill.drugShape,
+                pill.chart,
                 pill.lengLong,
                 pill.lengShort,
                 pill.thick,
                 pill.entpName,
+                pill.itemImage,
             )
         }
     }
