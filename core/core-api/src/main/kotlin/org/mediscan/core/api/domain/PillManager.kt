@@ -1,28 +1,28 @@
 package org.mediscan.core.api.domain
 
-import org.mediscan.client.example.PillIdentificationService
-import org.mediscan.core.api.controller.v1.request.PillDomainIdentificationRequestDto
-import org.mediscan.core.api.controller.v1.response.PillDomainIdentificationResponseDto
+import org.apache.commons.csv.CSVFormat
+import org.apache.commons.csv.CSVPrinter
+import org.apache.commons.io.output.ByteArrayOutputStream
 import org.springframework.stereotype.Component
+import java.io.OutputStreamWriter
 
 @Component
-class PillManager(
-    private val pillIdentificationService: PillIdentificationService,
-) {
-    fun identifyPill(request: PillDomainIdentificationRequestDto): List<PillDomainIdentificationResponseDto> {
-        val results = pillIdentificationService.identifyPill(
-            request.frontImage,
-            request.backImage,
-            request.pillShape,
-            request.frontMarking,
-            request.backMarking,
-        )
+class PillManager {
+    fun createCsvInMemory(pillShape: String, pillFrontMarking: String?, pillBackMarking: String?): ByteArray {
+        val outputStream = ByteArrayOutputStream()
+        val writer = OutputStreamWriter(outputStream)
+        val csvPrinter =
+            CSVPrinter(writer, CSVFormat.DEFAULT.builder().setHeader("shape", "f_text", "b_text", "drug_code").build())
 
-        return results.map { responseDto ->
-            PillDomainIdentificationResponseDto(
-                drugCode = responseDto.drugCode,
-                confidence = responseDto.confidence,
-            )
-        }
+        csvPrinter.printRecord(
+            pillShape,
+            pillFrontMarking.let { it ?: "none" },
+            pillBackMarking.let { it ?: "none" },
+            "none",
+        )
+        csvPrinter.flush()
+        csvPrinter.close()
+
+        return outputStream.toByteArray()
     }
 }
