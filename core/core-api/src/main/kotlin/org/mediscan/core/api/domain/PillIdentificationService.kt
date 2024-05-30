@@ -1,5 +1,6 @@
-package org.mediscan.client.example
+package org.mediscan.core.api.domain
 
+import org.mediscan.client.example.AiServiceClient
 import org.mediscan.client.example.model.PillIdentificationRequestDto
 import org.mediscan.client.example.model.PillIdentificationResponseDto
 import org.springframework.stereotype.Service
