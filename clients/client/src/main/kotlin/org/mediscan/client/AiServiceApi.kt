@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.multipart.MultipartFile
 
-@FeignClient(name = "ai-service", url = "127.0.0.1:8000")
+@FeignClient(value = "ai-service", url = "\${example.api.url}")
 internal interface AiServiceApi {
     @RequestMapping(
         method = [RequestMethod.POST],
