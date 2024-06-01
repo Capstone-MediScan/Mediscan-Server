@@ -4,10 +4,10 @@ import org.mediscan.client.AiServiceClient
 import org.mediscan.core.api.controller.v1.response.PillDetailResponseDto
 import org.mediscan.core.api.controller.v1.response.PillIdentificationResponseDto
 import org.mediscan.core.api.controller.v1.response.PillSearchResponseDto
-import org.mediscan.core.api.support.utils.InMemoryMultipartFile
+import org.mediscan.core.api.support.utils.FileMultipartFile
 import org.mediscan.core.enums.Color
 import org.springframework.stereotype.Service
-import kotlin.math.round
+import java.io.File
 
 @Service
 class PillService(
@@ -18,38 +18,38 @@ class PillService(
     fun identifyPill(
         pillIdentificationData: PillIdentificationData,
     ): List<PillIdentificationResponseDto> {
-        val createCsvInMemory = pillManager.createCsvInMemory(
+        val csvFileName = "./data/pill.csv"
+
+        pillManager.createCsvFile(
             pillIdentificationData.pillShape,
             pillIdentificationData.frontMarking,
             pillIdentificationData.backMarking,
+            csvFileName,
         )
-
-        val aiServiceClientResult = aiServiceClient.predict(
-            InMemoryMultipartFile(
-                "pill",
-                "pill.csv",
-                "text/csv",
-                createCsvInMemory,
-            ),
-            pillIdentificationData.frontImage,
-            pillIdentificationData.backImage,
-        )
-
-        val responseDtoList = mutableListOf<PillIdentificationResponseDto>()
-        for (result in aiServiceClientResult) {
-            val pill = pillReader.readPill(result.code)
-            val responseDto = PillIdentificationResponseDto(
-                pill.itemSeq,
-                result.rank,
-                pill.itemName,
-                pill.itemImage,
-                pill.className,
-                round(result.accuracy).toLong(),
+        try {
+            val aiServiceClientResult = aiServiceClient.predict(
+                FileMultipartFile(File(csvFileName), "text/csv"),
+                pillIdentificationData.frontImage,
+                pillIdentificationData.backImage,
             )
-            responseDtoList.add(responseDto)
-        }
+            val responseDtoList = mutableListOf<PillIdentificationResponseDto>()
+            for (result in aiServiceClientResult) {
+                val pill = pillReader.readPill(result.code)
+                val responseDto = PillIdentificationResponseDto(
+                    pill.itemSeq,
+                    result.rank,
+                    pill.itemName,
+                    pill.itemImage,
+                    pill.className,
+                    (result.accuracy * 100).toLong(),
+                )
+                responseDtoList.add(responseDto)
+            }
 
-        return responseDtoList
+            return responseDtoList
+        } finally {
+            File(csvFileName).delete()
+        }
     }
 
     fun searchPill(

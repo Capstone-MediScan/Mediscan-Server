@@ -9,11 +9,10 @@ class AiServiceClient internal constructor(
     private val aiServiceApi: AiServiceApi,
 ) {
     fun predict(
+        pillCsv: MultipartFile,
         frontImage: MultipartFile,
         backImage: MultipartFile,
-        pillCsv: MultipartFile,
     ): List<AiServiceClientResult> {
-        val request = AiServiceRequestDto(frontImage, backImage, pillCsv)
-        return aiServiceApi.predictPill(request)
+        return aiServiceApi.predictPill(frontImage, backImage, pillCsv).result
     }
 }
