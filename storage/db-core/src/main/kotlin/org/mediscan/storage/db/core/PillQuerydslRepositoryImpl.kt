@@ -32,8 +32,7 @@ class PillQuerydslRepositoryImpl(
             )
             .fetch()
 
-        pillEntities = result1 + result2
-        pillEntities.distinct()
+        pillEntities = (result1 + result2).distinct()
         return pillEntities
     }
 }
