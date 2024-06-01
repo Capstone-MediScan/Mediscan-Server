@@ -32,6 +32,9 @@ jobs:
           mkdir -p storage/db-core/src/main/resources
           touch storage/db-core/src/main/resources/db-core.yml
           echo "${{ secrets.DB_CORE_YML }}" > storage/db-core/src/main/resources/db-core.yml
+          mkdir -p clients/client/src/main/resources
+          touch clients/client/src/main/resources/client.yml
+          echo "${{ secrets.CLEINT_YML }}" > clients/client/src/main/resources/client.yml
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
