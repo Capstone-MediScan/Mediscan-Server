@@ -31,7 +31,3 @@ tasks.named("clean") {
         generated.deleteRecursively()
     }
 }
-
-kapt {
-    generateStubs = true
-}
